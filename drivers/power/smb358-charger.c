@@ -203,7 +203,7 @@ int pre_usb_current_ma = -EINVAL;
 bool thermal = false;
 bool recovery = false;
 int fastmmi_mode = 0;
-int rolex_smb358 = 1;
+bool rolex_smb358 = true;
 
 #define DEBUG
 
