@@ -2473,7 +2473,7 @@ static void smb358_external_power_changed(struct power_supply *psy)
 
 	rc = chip->usb_psy->get_property(chip->usb_psy,
 				POWER_SUPPLY_PROP_CURRENT_MAX, &prop);
-	chrg_current = get_prop_current_now(chip);			
+	chrg_current = prop.intval / 1000;			
 	if (rc)
 		dev_err(chip->dev,
 			"Couldn't read USB current_max property, rc=%d\n", rc);
