@@ -2484,14 +2484,21 @@ static void smb358_external_power_changed(struct power_supply *psy)
            {
 	      if (rolex_smb358 == 1)
 	      {
-		 // If Current (mA) is between 490mA and 900mA then USB charging 
-		 // For USB2.0  max current is 500mA and for USB 3.0 Max current is 900ma 
-                 if ((prop.intval / 1000) <= 900 && (prop.intval / 1000) > 490 ) 
+		 // Poor way to detect USB 
+		 // For USB3.0  max current is 900mA
+                 if ((prop.intval / 1000) == USB3_MAX_CURRENT_MA ) 
 		 {
-		    // Raise USB-Charging Current (mA) to 1000 mA (Maximum Supported).
+		    // Raise USB-Charging Current Maximum Supported
                     pr_info("Using USB Current (mA) %d\n", chrg_current);
-                    current_limit = 1000;
+                    current_limit = USB3_MAX_CURRENT_MA;
                  }
+		 // If Current 500mA then assume its USB2.0
+                 if ((prop.intval / 1000) == USB2_MAX_CURRENT_MA ) 
+		 {
+		    // Raise USB-Charging Current Maximum Supported
+                    pr_info("Using USB Current (mA) %d\n", chrg_current);
+                    current_limit = USB2_MAX_CURRENT_MA;
+                 }		
                  else
 	         {
                      pr_info("Using AC Charge Current (mA) %d\n", chrg_current);
