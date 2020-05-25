@@ -790,6 +790,12 @@ KBUILD_CFLAGS   += $(call cc-option,-Werror=date-time)
 # use the deterministic mode of AR if available
 KBUILD_ARFLAGS := $(call ar-option,D)
 
+# Kill array bound warnings
+KBUILD_CFLAGS	+= $(call cc-disable-warning,array-bounds,)
+
+# Kill misleading indention errors
+KBUILD_CFLAGS   += -Wno-misleading-indentation
+
 # check for 'asm goto'
 ifeq ($(shell $(CONFIG_SHELL) $(srctree)/scripts/gcc-goto.sh $(CC)), y)
 	KBUILD_CFLAGS += -DCC_HAVE_ASM_GOTO
