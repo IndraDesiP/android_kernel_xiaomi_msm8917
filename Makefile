@@ -797,6 +797,12 @@ KBUILD_CFLAGS	+= $(call cc-disable-warning,array-bounds,)
 # Kill misleading indention errors
 KBUILD_CFLAGS   += -Wno-misleading-indentation
 
+# Kill stringop overflow errors
+KBUILD_CFLAGS   += -Wno-stringop-overflow
+
+# Kill switch unreachable errors
+KBUILD_CFLAGS   += -Wno-switch-unreachable
+
 # check for 'asm goto'
 ifeq ($(shell $(CONFIG_SHELL) $(srctree)/scripts/gcc-goto.sh $(CC)), y)
 	KBUILD_CFLAGS += -DCC_HAVE_ASM_GOTO
